@@ -1,14 +1,5 @@
 /*****添加frame展示   Doris  *******/
 window.onload = function(){
-  /*$('#show').click(function(){
-  	var url = document.getElementById("addr").value;
-  	document.getElementById("webpage").src = url;
-  	document.getElementById("webpage").style.display = "block";
-  	
-  	addIFrameEvents();
-  	
-  });*/
-  
   		//timeline功能
 	  document.getElementById("show").onclick = function(){
 		  var url = document.getElementById("addr").value;
@@ -34,18 +25,28 @@ window.onload = function(){
   		});
   	}else{
   		iframe.onload = function(){
-  			//alert("Local iframe is now loaded.");
-  			//var iframewindow = iframe.contentWindow;
+  			
   			var doc = document.getElementById('webpage').contentDocument;
   			var links_arr = doc.getElementsByTagName("link");
-  			//var linkss = links_arr.join("|");
+  			var hrefs = new Array();
   			for(var i=0; i<links_arr.length; i++){
-  				console.log(i+" "+links_arr[i]);
+  				//console.log(i+" "+links_arr[i].getAttribute("href"));
+				hrefs.push(links_arr[i].getAttribute("href"));
+				//console.log(hrefs.length);
   			}
+			//var json = hrefs.toJSON();
+
+		 $.ajax({
+		  	type:"POST",
+		  	url:"download.php",
+		  	data:{csshref: hrefs},
+		  	dataType: "json",//希望回调函数返回的数据类型
+		  	success:function(json){
+		  			
+		  		}
+		  });
   			
-  			//var links_arr = $("#webpage").contents().find("link");
-  			//var links_arr = $('link', document.frames('webpage').document);
-  			//var hrefs_arr= links_arr.attr('href');
+  			
   		}
   	}
   }

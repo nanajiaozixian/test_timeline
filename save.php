@@ -1,4 +1,7 @@
 <?php
+
+
+
 $url = "";
 //»ñÈ¡ÍøÒ³url
 if(isset($_POST['pageurl'])){
@@ -33,6 +36,8 @@ foreach($links as $val){
 $str_new = relative_to_absolute($str_copy, $url);
 file_put_contents($copy_file, $str_new);
 echo $copy_file;
+
+
 function relative_to_absolute($content, $feed_url){
 	//echo "feed_url: $feed_url<br/>";
 	preg_match('/(http|https|ftp):\/\//', $feed_url, $protocol);
